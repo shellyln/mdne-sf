@@ -60,7 +60,7 @@ For more informations, see [mdne electron](https://github.com/shellyln/mdne-elec
 
 
 
-## Distributions and Integrations
+## 🚚 Distributions and Integrations
 
 * [mdne-sf](https://github.com/shellyln/mdne-sf)
   * Edit Salesforce record's field. (browser app)
