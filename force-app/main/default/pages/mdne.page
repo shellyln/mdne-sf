@@ -1,0 +1,234 @@
+<!---
+Copyright (c) 2020 Shellyl_N and Authors
+license: MIT
+https://github.com/shellyln
+--><apex:page controller="MdneBackend"
+    applyHtmlTag="false"
+    applyBodyTag="false"
+    standardStylesheets="false"
+    lightningStylesheets="false"
+    showHeader="false"
+    showQuickActionVfHeader="false"
+    sidebar="false"
+    docType="html-5.0"
+><html>
+<head>
+    <meta charset="utf-8" />
+    <title>Markdown Editor</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#424242" />
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/menneu-0.5.2/menneu.min.js')}" crossorigin="anonymous" defer="defer"></script>
+    <link rel="icon" type="image/png" href="{!URLFOR($Resource.mdne,'favicon.png')}" />
+    <link rel="apple-touch-icon" sizes="48x48" href="{!URLFOR($Resource.mdne,'icons/icon-48x48.png')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.mdne,'assets/vendor/normalize-8.0.1/normalize.min.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.mdne,'assets/vendor/materialize-1.0.0/materialize.min.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.mdne,'assets/vendor/materialize-1.0.0/icon.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.mdne,'assets/vendor/dialog-polyfill/dialog-polyfill.css')}" />
+    <link rel="stylesheet" href="{!URLFOR($Resource.mdne,'assets/style/index.css')}" />
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/ace.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/theme-monokai.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-patch/lisp_highlight_rules.js')}"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-text.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-xml.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-html.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-csharp.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-css.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-dockerfile.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-golang.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-graphqlschema.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-ini.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-java.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-javascript.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-json.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-json5.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-jsx.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-kotlin.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-latex.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-less.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-lisp.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-makefile.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-protobuf.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-python.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-r.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-ruby.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-rust.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-sass.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-scss.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-sh.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-sql.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-svg.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-tex.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-toml.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-typescript.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-tsx.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-1.4.12/mode-yaml.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/ace-patch/mode-markdown.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/react-17.0.1/react.production.min.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/react-17.0.1/react-dom.production.min.js')}" crossorigin="anonymous"></script>
+<!--
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.development.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+-->
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/materialize-1.0.0/materialize.min.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/pako-1.0.10/pako.min.js')}" crossorigin="anonymous"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/dialog-polyfill/dialog-polyfill.js')}"></script>
+    <script src="{!URLFOR($Resource.mdne,'assets/vendor/liyad-0.6.0/liyad.min.js')}" crossorigin="anonymous"></script>
+</head>
+<body class="grey darken-2" style="overflow-x: hidden; overflow-y: auto;">
+    <main id="app" class="grey darken-1"></main>
+    <script type="module">
+
+window._MDNE_BACKEND_TYPE='EXTERNAL_MIXED';
+window._MDNE_BACKEND_RESOURCE_BASE_DIR='{!$Resource.mdne}/';
+
+let objOpened = void 0;
+let fieldOpened = void 0;
+let idOpened = void 0;
+
+const getFieldValue = (obj, field, id) => {
+    const promise = new Promise((resolve, reject) => {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.MdneBackend.getFieldValue}',
+            obj,
+            field,
+            id,
+            function(result, event){
+                if (event.status) {
+                    resolve(result);
+                } else if (event.type === 'exception') {
+                    reject(event.message + event.where);
+                } else {
+                    reject(event.message);
+                }
+            }, 
+            {escape: false}
+        );
+    });
+    return promise;
+};
+
+const setFieldValue = (obj, field, id, value) => {
+    const promise = new Promise((resolve, reject) => {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.MdneBackend.setFieldValue}',
+            obj,
+            field,
+            id,
+            value,
+            function(result, event){
+                if (event.status) {
+                    resolve(result);
+                } else if (event.type === 'exception') {
+                    reject(event.message + event.where);
+                } else {
+                    reject(event.message);
+                }
+            }, 
+            {escape: false}
+        );
+    });
+    return promise;
+};
+
+window._mdneExternalBackend = (browserBackend) => {
+    let targetPath = void 0;
+    let targetUrl = void 0;
+    const getStartupFile = (async () => {
+        const util = menneu.getAppEnv().RedAgateUtil;
+
+        if (window.location.hash) {
+            const result = {};
+            window.location.hash.substring(1).split('&').forEach((part) => {
+                const item = part.split('=');
+                result[item[0]] = decodeURIComponent(item[1]);
+            });
+
+            if (window.location.hash.indexOf('open.obj=') >= 0 &&
+                    window.location.hash.indexOf('open.field=') >= 0 &&
+                    window.location.hash.indexOf('open.id=') >= 0) {
+
+                if (result['open.obj'] && result['open.field'] && result['open.id']) {
+                    targetPath = `Untitled.md`;
+                    try {
+                        targetUrl = `data:text/plain;base64,${
+                            util.Base64.encode(
+                                util.TextEncoding.encodeToUtf8(
+                                    (await getFieldValue(result['open.obj'], result['open.field'], result['open.id'])) ?? ''
+                                )
+                            )
+                        }`;
+                        objOpened = result['open.obj'];
+                        fieldOpened = result['open.field'];
+                        idOpened = result['open.id'];
+                    // eslint-disable-next-line no-empty
+                    } catch (e) {}
+                }
+            }
+        }
+        if (! targetUrl) {
+            return await browserBackend.getStartupFile();
+        }
+        const response = await fetch(targetUrl, {});
+        if (response.ok) {
+            return {
+                path: targetPath,
+                text: await response.text(),
+            };
+        }
+        throw new Error('Fetching url failed. Network response was not ok, or CORB error.');
+    });
+
+    const saveFile = (async (text, ...filePath) => {
+        let saved = false;
+        const util = menneu.getAppEnv().RedAgateUtil;
+
+        if (window.location.hash) {
+            const result = {};
+            window.location.hash.substring(1).split('&').forEach((part) => {
+                const item = part.split('=');
+                result[item[0]] = decodeURIComponent(item[1]);
+            });
+
+            if (window.location.hash.indexOf('open.obj=') >= 0 &&
+                    window.location.hash.indexOf('open.field=') >= 0 &&
+                    window.location.hash.indexOf('open.id=') >= 0) {
+
+                if (result['open.obj'] && result['open.field'] && result['open.id'] &&
+                        result['open.obj'] === objOpened && result['open.field'] === fieldOpened && result['open.id'] === idOpened) {
+                    try {
+                        await setFieldValue(objOpened, fieldOpened, idOpened, text);
+                        saved = true;
+                    // eslint-disable-next-line no-empty
+                    } catch (e) {}
+                }
+            }
+        }
+        if (saved) {
+            let p = await browserBackend.pathJoin(...filePath);
+            let b = await browserBackend.getBaseName(p);
+            return ({
+                path: p,
+                name: b,
+            });
+        } else {
+            return await browserBackend.saveFile(text, ...filePath);
+        }
+    });
+
+    const saveFileAs = (async (text, ...filePath) => {
+        targetPath = void 0;
+        targetUrl = void 0;
+        return await browserBackend.saveFileAs(text, ...filePath);
+    });
+
+    return ({
+        getStartupFile,
+        saveFile,
+        saveFileAs,
+    });
+};
+
+    </script>
+    <script src="{!URLFOR($Resource.mdne,'assets/script/index.js')}" type="module"></script>
+</body>
+</html></apex:page>

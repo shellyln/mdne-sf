@@ -1,0 +1,56 @@
+<!---
+Copyright (c) 2020 Shellyl_N and Authors
+license: MIT
+https://github.com/shellyln
+--><apex:page standardController="Account"
+    applyHtmlTag="false"
+    applyBodyTag="false"
+    standardStylesheets="false"
+    lightningStylesheets="false"
+    showHeader="false"
+    showQuickActionVfHeader="false"
+    sidebar="false"
+    docType="html-5.0"
+><html>
+<head>
+    <apex:stylesheet value="{!URLFOR($Resource.mdne,'assets/vendor/normalize-8.0.1/normalize.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.mdne_plus,'highlight.js-10.5.0/default.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.mdne_plus,'github-markdown-css-4.0.0/github-markdown.min.css')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mdne_plus,'highlight.js-10.5.0/highlight.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.mdne,'assets/vendor/menneu-0.5.2/menneu.min.js')}"/>
+    <script src="/canvas/sdk/js/publisher.js"/>
+</head>
+<body>
+<apex:form style="display: none;">
+    <!-- NOTE: Select the field -->
+    <apex:inputHidden value="{! Account.Description }" html-class="markdown-preview-content-value" />
+</apex:form>
+<div class="markdown-body markdown-rendering-target"></div>
+<script type="module">
+(async () => {
+    const buf = await menneu.render(document.querySelector('.markdown-preview-content-value').value, {}, {
+        // replacementMacros: [{
+        //     re: /!!!lsx\s([\s\S]+?)!!!/g,
+        //     fn: 'lsx', // evaluate input as LSX script
+        // }],
+        title: 'Untitled',
+        inputFormat: 'md-fragment',
+        rawInput: true,
+        dataFormat: 'object',
+        outputFormat: 'html',
+    });
+    document.querySelector('.markdown-rendering-target').innerHTML = String(buf);
+})();
+</script>
+<script type="module">
+    setTimeout(() => {
+        // https://stackoverflow.com/questions/11071314/javascript-execute-after-all-images-have-loaded
+        Promise.all(Array.from(document.images)
+                .filter(img => !img.complete)
+                .map(img => new Promise(resolve => { img.onload = img.onerror = resolve; }))).then(() => {
+            Sfdc.canvas.publisher.resize({ height: `${document.body.clientHeight}px` });
+        });
+    }, 100);
+</script>
+</body>
+</html></apex:page>
