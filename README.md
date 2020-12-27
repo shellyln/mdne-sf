@@ -60,6 +60,26 @@ For more informations, see [mdne electron](https://github.com/shellyln/mdne-elec
 
 
 
+## Distributions and Integrations
+
+* [mdne-sf](https://github.com/shellyln/mdne-sf)
+  * Edit Salesforce record's field. (browser app)
+    * *This repository*
+  * Markdown preview Visualforce page example
+* [mdne-electron](https://github.com/shellyln/mdne-electron)
+  * Standalone offline desktop app for Windows/Mac/Linux.
+    * [Electron](https://electronjs.org/) app
+* [mdne online](https://github.com/shellyln/mdne-electron)
+  * Online markdown editor for Chrome/Chromium Edge/Firefox.
+    * [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps) (Progressive Web Apps)
+* [mdne (mdne-classic)](https://github.com/shellyln/mdne)
+  * Offline desktop app for Google Chrome browser + Node.js.
+    * [Carlo](https://github.com/GoogleChromeLabs/carlo) app
+* [mdne-for-kintone](https://github.com/shellyln/mdne-for-kintone)
+  * Edit kintone record's field. (browser app)
+
+
+
 ## ⚙️ Setup a deployment and contribution environment
 
 ```bash
