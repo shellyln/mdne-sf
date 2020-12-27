@@ -7,7 +7,12 @@
 ![screenshot](https://raw.githubusercontent.com/shellyln/mdne-sf/master/docs/mdne-sf.png)
 
 
-## Features
+## 💎 Features
+### 🟢 Salesforce integration features
+* Edit Salesforce record's field.
+* Markdown preview Visualforce example (For embedding in record detail page)
+
+### 🟢 Editor features
 * Live preview of Markdown, HTML, [LSX](https://github.com/shellyln/liyad#what-is-lsx) formats.
 * Export Markdown, HTML, and LSX into HTML.
 * Code highlighting
