@@ -1,8 +1,10 @@
 # mdne-sf - Markdown Neo Edit for Salesforce
 
-<img src="https://raw.githubusercontent.com/shellyln/mdne-electron/master/docs/logo.svg?sanitize=true" title="logo" style="width: 200px">
+<img src="https://raw.githubusercontent.com/shellyln/mdne-sf/master/docs/logo.svg?sanitize=true" title="logo" style="width: 200px">
 
 ### A simple markdown and code editor powered by [Markdown-it](https://github.com/markdown-it/markdown-it) and [Ace](https://ace.c9.io/).
+
+![screenshot](https://raw.githubusercontent.com/shellyln/mdne-sf/master/docs/mdne-sf.png)
 
 
 ## Features
